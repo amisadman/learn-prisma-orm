@@ -52,8 +52,28 @@ const run = async()=>{
             profile:true
         }
     });
-    console.log("Users: ",getAllUser);
-    console.dir(getAllUser, {depth:Infinity})
+    // console.log("Users: ",getAllUser);
+    // console.dir(getAllUser, {depth:Infinity})
+
+    const updateProfile = await prisma.profile.update({
+        where:{
+            userId:1,
+        },
+        data:{
+            bio:"Learing Next Level Web Dev"
+        },
+        select:{
+            bio: true,
+            user:{
+                select:{
+                    id:true,
+                    name:true
+                }
+            }
+        }
+    });
+    console.log("Update bio", updateProfile);
+     
 }
 
 
