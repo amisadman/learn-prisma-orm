@@ -55,25 +55,31 @@ const run = async()=>{
     // console.log("Users: ",getAllUser);
     // console.dir(getAllUser, {depth:Infinity})
 
-    const updateProfile = await prisma.profile.update({
+    // const updateProfile = await prisma.profile.update({
+    //     where:{
+    //         userId:1,
+    //     },
+    //     data:{
+    //         bio:"Learing Next Level Web Dev"
+    //     },
+    //     select:{
+    //         bio: true,
+    //         user:{
+    //             select:{
+    //                 id:true,
+    //                 name:true
+    //             }
+    //         }
+    //     }
+    // });
+    // console.log("Update bio", updateProfile);
+     
+    const deleteUser = await prisma.users.delete({
         where:{
-            userId:1,
-        },
-        data:{
-            bio:"Learing Next Level Web Dev"
-        },
-        select:{
-            bio: true,
-            user:{
-                select:{
-                    id:true,
-                    name:true
-                }
-            }
+            id: 3
         }
     });
-    console.log("Update bio", updateProfile);
-     
+    console.log("user deleted: ",deleteUser);
 }
 
 
