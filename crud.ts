@@ -1,6 +1,7 @@
 import { toUSVString } from "node:util";
 import { ROLE } from "./generated/prisma/enums";
 import { prisma } from "./lib/prisma";
+import { emitWarning } from "node:process";
 
 // const run = async(name:string, email:string, role?:ROLE)=>{
 
@@ -40,54 +41,64 @@ import { prisma } from "./lib/prisma";
 //   console.log("created profile", createProfie);
 // };
 
-
 //retrive user data
 
-const run = async()=>{
-    const getAllUser = await prisma.users.findMany({
-        select:{
-            id: true,
-            name: true,
-            posts: true,
-            profile:true
-        }
-    });
-    // console.log("Users: ",getAllUser);
-    // console.dir(getAllUser, {depth:Infinity})
+const run = async () => {
+  const getAllUser = await prisma.users.findMany({
+    select: {
+      id: true,
+      name: true,
+      posts: true,
+      profile: true,
+    },
+  });
+  // console.log("Users: ",getAllUser);
+  // console.dir(getAllUser, {depth:Infinity})
 
-    // const updateProfile = await prisma.profile.update({
-    //     where:{
-    //         userId:1,
-    //     },
-    //     data:{
-    //         bio:"Learing Next Level Web Dev"
-    //     },
-    //     select:{
-    //         bio: true,
-    //         user:{
-    //             select:{
-    //                 id:true,
-    //                 name:true
-    //             }
-    //         }
-    //     }
-    // });
-    // console.log("Update bio", updateProfile);
-     
-    const deleteUser = await prisma.users.delete({
-        where:{
-            id: 3
-        }
-    });
-    console.log("user deleted: ",deleteUser);
-}
+  // const updateProfile = await prisma.profile.update({
+  //     where:{
+  //         userId:1,
+  //     },
+  //     data:{
+  //         bio:"Learing Next Level Web Dev"
+  //     },
+  //     select:{
+  //         bio: true,
+  //         user:{
+  //             select:{
+  //                 id:true,
+  //                 name:true
+  //             }
+  //         }
+  //     }
+  // });
+  // console.log("Update bio", updateProfile);
 
+  //     const deleteUser = await prisma.users.delete({
+  //         where:{
+  //             id: 3
+  //         }
+  //     });
+  //     console.log("user deleted: ",deleteUser);
+
+  const upsertUser = await prisma.users.upsert({
+    where: {
+      id: 3,
+    },
+    update: {
+      name: "Uname",
+    },
+    create: {
+      name: "Dhiraj",
+      email: "valija2@user.com",
+    },
+  });
+  console.log(upsertUser);
+};
 
 // run("Sadman Islam", "sadman@email.com");
 // run("Tahmid Rahman", "tahmid@email.com");
 // run("Shaheenur Rashid", "rashid@email.com");
 // run("Dhiraj Dhar", "vatija@email.com");
-
-
 
 run();
