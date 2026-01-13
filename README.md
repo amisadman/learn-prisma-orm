@@ -381,7 +381,7 @@ npx prisma studio
 ## Resources
 
 - [Prisma Documentation](https://www.prisma.io/docs)
-- [Prisma Schema Reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference)
-- [Prisma Client API](https://www.prisma.io/docs/reference/api-reference/prisma-client-reference)
+- [Prisma Schema Reference](https://www.prisma.io/docs/orm/prisma-schema)
+- [Prisma Client CRUD API](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
 
 ---
